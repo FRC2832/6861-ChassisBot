@@ -26,22 +26,18 @@ public final class Constants {
      */
 
     // Drivetrain motor IDs
-    public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 12;
-    public static final int DRIVETRAIN_RIGHT_FRONT_SPARK = 10;
-    public static final int DRIVETRAIN_LEFT_BACK_SPARK = 7;
-    public static final int DRIVETRAIN_RIGHT_BACK_SPARK = 8;
+    public static final int DRIVETRAIN_LEFT_FRONT_TALLON = 1;
+    public static final int DRIVETRAIN_RIGHT_FRONT_TALLON = 3;
+    public static final int DRIVETRAIN_LEFT_BACK_TALLON = 2;
+    public static final int DRIVETRAIN_RIGHT_BACK_TALLON = 4;
 
     //Drivetrain current limit
-    public static final int DRIVETRAIN_MOTOR_CURRENT_LIMIT_AMPS = 60;
-
-    // Drivetrain controls slew rates
-    //public static final double FORWARD_BACK_SLEW_RATE = .2;
-    //public static final double LEFT_RIGHT_SLEW_RATE = .2;
+    public static final int DRIVETRAIN_MOTOR_CURRENT_LIMIT_AMPS = 50;
 
 
     // Drive distance factors
     public static final int DRIVETRAIN_WHEEL_DIAMETER = 6;
-    public static final double DRIVETRAIN_STRAFE_RATIO = 1.26;
+    public static final double DRIVETRAIN_STRAFE_RATIO = 1.26; // TODO: might not need this for the chassis bot
     // using ratio because encoders aren't accurate when going sideways
     // ratio obtained becuase it went 3.75" when commanded to go 48"
 
