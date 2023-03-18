@@ -45,6 +45,7 @@ public class Drivetrain extends SubsystemBase {
 
     // Pigeon IMU also used for gyro:
     private WPI_PigeonIMU pigeon;
+    private double currentAngle;
 
     // TODO: Add odomtery class for tracking robot pose
 
@@ -53,17 +54,26 @@ public class Drivetrain extends SubsystemBase {
         // initialize stuff here
 
         // Spark max
-        leftFrontLeadTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_LEFT_FRONT_TALON);
-        leftFrontSupportTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_LEFT_FRONT_TALON);
-        rightFrontLeadTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_RIGHT_FRONT_TALON);
-        rightFrontSupportTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_RIGHT_FRONT_TALON);
-        leftBackLeadTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_LEFT_BACK_TALON);
-        leftBackSupportTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_LEFT_BACK_TALON);
-        rightBackLeadTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_RIGHT_BACK_TALON);
-        rightBackSupportTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_RIGHT_BACK_TALON);
-        
+        leftFrontLeadTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_LEFT_FRONT_LEAD_TALON);
+        leftFrontSupportTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_LEFT_FRONT_SUPPORT_TALON);
 
-        mecanumDriveObj = new MecanumDrive(leftFrontTalon, leftBackTalon, rightFrontTalon, rightBackTalon);
+        rightFrontLeadTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_RIGHT_FRONT_LEAD_TALON);
+        rightFrontSupportTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_RIGHT_FRONT_SUPPORT_TALON);
+
+        leftBackLeadTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_LEFT_BACK_LEAD_TALON);
+        leftBackSupportTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_LEFT_BACK_SUPPORT_TALON);
+
+        rightBackLeadTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_RIGHT_BACK_LEAD_TALON);
+        rightBackSupportTalon = new WPI_TalonSRX(Constants.DRIVETRAIN_RIGHT_BACK_SUPPORT_TALON);
+
+        leftFrontSupportTalon.follow(leftFrontLeadTalon);
+        rightFrontSupportTalon.follow(rightFrontLeadTalon);
+
+        leftBackSupportTalon.follow(leftBackLeadTalon);
+        rightBackSupportTalon.follow(rightBackLeadTalon);
+
+        mecanumDriveObj = new MecanumDrive(leftFrontLeadTalon, leftBackLeadTalon, rightFrontLeadTalon,
+                rightBackLeadTalon);
 
         // Encoder for the spark max
         // TODO: zero the wheel encoders
@@ -72,9 +82,11 @@ public class Drivetrain extends SubsystemBase {
         // rightFrontEncoderObj = rightFrontTalon.getEncoder();
         // rightBackEncoderObj = rightBackTalon.getEncoder();
         this.pigeon = pigeon;
-
-        leftFrontTalon.setInverted(true);
-        rightFrontTalon.setInverted(true);
+    
+        leftFrontLeadTalon.setInverted(true);
+        leftFrontSupportTalon.setInverted(true);
+        rightFrontLeadTalon.setInverted(true);
+        rightFrontSupportTalon.setInverted(true);
 
         // leftFrontTalon.setIdleMode(IdleMode.kBrake);
         // rightFrontTalon.setIdleMode(IdleMode.kBrake);
@@ -100,11 +112,13 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void setRightBackMotorInversion(boolean isInverted) {
-        rightBackTalon.setInverted(isInverted);
+        rightBackLeadTalon.setInverted(isInverted);
+        rightBackSupportTalon.setInverted(isInverted);
     }
 
     public void setLeftFrontMotorInversion(boolean isInverted) {
-        leftFrontTalon.setInverted(isInverted);
+        leftFrontLeadTalon.setInverted(isInverted);
+        leftFrontSupportTalon.setInverted(isInverted);
     }
 
     public void mecanumDriveCartesian(double xSpeed, double ySpeed, double zRotation) {
@@ -114,6 +128,7 @@ public class Drivetrain extends SubsystemBase {
         // SlewRateLimiter filterLeftRight = new
         // SlewRateLimiter(Constants.LEFT_RIGHT_SLEW_RATE);
         mecanumDriveObj.driveCartesian(xSpeed, ySpeed, zRotation);
+        System.out.println("Pigeon angle: " + currentAngle);
         // mecanumDriveObj.driveCartesian(filterLeftRight.calculate(xSpeed),
         // filterFwdBack.calculate(ySpeed), zRotation);
     }
@@ -127,6 +142,7 @@ public class Drivetrain extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        currentAngle = pigeon.getAngle();
     }
 
     // scales the max speed of the drivetrain. default = 1
@@ -173,6 +189,5 @@ public class Drivetrain extends SubsystemBase {
      */
     public Pose2d getPose() {
         return poseEstimator.getEstimatedPosition();
-
     }
 }

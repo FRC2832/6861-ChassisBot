@@ -23,7 +23,7 @@ public class JoystickSubsystem extends SubsystemBase {
     public JoystickSubsystem() {
         driverController = new CommandXboxController(Constants.DRIVER_CONTROLLER);
         operatorController = new CommandXboxController(Constants.OPERATOR_CONTROLLER);
-        setDeadband(1.0);
+        setDeadband(0.2);
     }
 
     private void setDeadband(double d) {
@@ -118,6 +118,7 @@ public class JoystickSubsystem extends SubsystemBase {
     public Trigger getDriverRightBumper() {
         return driverController.rightBumper();
     }
+
     public Trigger getDriverLeftBumper() {
         return driverController.leftBumper();
     }

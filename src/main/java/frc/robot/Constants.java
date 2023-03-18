@@ -26,14 +26,17 @@ public final class Constants {
      */
 
     // Drivetrain motor IDs
-    public static final int DRIVETRAIN_LEFT_FRONT_TALON = 1;
-    public static final int DRIVETRAIN_RIGHT_FRONT_TALON = 3;
-    public static final int DRIVETRAIN_LEFT_BACK_TALON = 2;
-    public static final int DRIVETRAIN_RIGHT_BACK_TALON = 4;
+    public static final int DRIVETRAIN_LEFT_FRONT_LEAD_TALON = 1;
+    public static final int DRIVETRAIN_RIGHT_FRONT_LEAD_TALON = 3;
+    public static final int DRIVETRAIN_LEFT_BACK_LEAD_TALON = 2;
+    public static final int DRIVETRAIN_RIGHT_BACK_LEAD_TALON = 4;
+    public static final int DRIVETRAIN_LEFT_FRONT_SUPPORT_TALON = 5;
+    public static final int DRIVETRAIN_RIGHT_FRONT_SUPPORT_TALON = 7;
+    public static final int DRIVETRAIN_LEFT_BACK_SUPPORT_TALON = 6;
+    public static final int DRIVETRAIN_RIGHT_BACK_SUPPORT_TALON = 8;
 
-    //Drivetrain current limit
+    // Drivetrain current limit
     public static final int DRIVETRAIN_MOTOR_CURRENT_LIMIT_AMPS = 50;
-
 
     // Drive distance factors
     public static final int DRIVETRAIN_WHEEL_DIAMETER = 6;
@@ -86,7 +89,6 @@ public final class Constants {
     public static final double INGESTOR_EXPEL_SPEED_MID = -0.75;
     public static final double INGESTOR_EXPEL_SPEED_LOW = -0.42;
     public static final double INGESTOR_INTAKE_SPEED = 0.75;
-    
 
     // Auton speed and drive distances (in inches)
     public static final double AUTON_SPEED = 0.3;

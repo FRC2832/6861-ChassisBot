@@ -4,10 +4,10 @@
 
 package frc.robot;
 
+import frc.robot.commands.DriveCartesian;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.JoystickSubsystem;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -25,8 +25,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
-    private final TalonSRX talonSRX = new TalonSRX(Constants.TALON_SRX);
-    private final WPI_PigeonIMU pigeon = new WPI_PigeonIMU(talonSRX);
+   // private final TalonSRX talonSRX = new TalonSRX(Constants.TALON_SRX);
+    private final WPI_PigeonIMU pigeon = new WPI_PigeonIMU(32);
     private final Drivetrain drivetrainObj = new Drivetrain(pigeon);
     private final JoystickSubsystem joystickSubsystemObj = new JoystickSubsystem();
 
@@ -34,6 +34,7 @@ public class RobotContainer {
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
+        drivetrainObj.setDefaultCommand(new DriveCartesian(drivetrainObj, joystickSubsystemObj));
         // Configure the trigger bindings
         configureBindings();
     }
@@ -54,10 +55,10 @@ public class RobotContainer {
      */
     private void configureBindings() {
         // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-
         // Schedule `exampleMethodCommand` when the Xbox controller's B button is
         // pressed,
         // cancelling on release.
+
     }
 
     /**
