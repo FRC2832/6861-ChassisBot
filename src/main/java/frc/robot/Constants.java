@@ -26,10 +26,10 @@ public final class Constants {
      */
 
     // Drivetrain motor IDs
-    public static final int DRIVETRAIN_LEFT_FRONT_TALLON = 1;
-    public static final int DRIVETRAIN_RIGHT_FRONT_TALLON = 3;
-    public static final int DRIVETRAIN_LEFT_BACK_TALLON = 2;
-    public static final int DRIVETRAIN_RIGHT_BACK_TALLON = 4;
+    public static final int DRIVETRAIN_LEFT_FRONT_TALON = 1;
+    public static final int DRIVETRAIN_RIGHT_FRONT_TALON = 3;
+    public static final int DRIVETRAIN_LEFT_BACK_TALON = 2;
+    public static final int DRIVETRAIN_RIGHT_BACK_TALON = 4;
 
     //Drivetrain current limit
     public static final int DRIVETRAIN_MOTOR_CURRENT_LIMIT_AMPS = 50;
